@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS_Master.Data", "ATS_Master.Data\ATS_Master.Data.csproj", "{974041B7-9B47-4046-8146-52018569BD7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS_Master.Web", "ATS_Master.Web\ATS_Master.Web.csproj", "{82067367-CECD-4D81-8FF6-E62E3E18CAA9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{974041B7-9B47-4046-8146-52018569BD7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{974041B7-9B47-4046-8146-52018569BD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{974041B7-9B47-4046-8146-52018569BD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{974041B7-9B47-4046-8146-52018569BD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82067367-CECD-4D81-8FF6-E62E3E18CAA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82067367-CECD-4D81-8FF6-E62E3E18CAA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82067367-CECD-4D81-8FF6-E62E3E18CAA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82067367-CECD-4D81-8FF6-E62E3E18CAA9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB1B43E8-95FA-4400-8157-D9832C9002CA}
+	EndGlobalSection
+EndGlobal
