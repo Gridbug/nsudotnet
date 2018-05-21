@@ -1,4 +1,5 @@
-﻿using ATS_Master.Data.Entities;
+﻿using System.Web.Mvc;
+using ATS_Master.Data.Entities;
 using Reinforced.Lattice.Configuration;
 using Reinforced.Lattice.Plugins.Limit;
 using Reinforced.Lattice.Plugins.Paging;
@@ -30,9 +31,12 @@ namespace ATS_Master.Web.Models
         public static Configurator<Person, PersonRow> Configure(this Configurator<Person, PersonRow> configurator)
         {
             configurator.DefaultTable();
+
+            configurator.PrimaryKey(x => x.Id);
+
             configurator.OrderFallback(x => x.Id);
 
-            configurator.Column(x => x.Id).DataOnly();
+            //configurator.Column(x => x.Id).DataOnly();
 
             //configurator.Column(x => x.Gender).Title("Gender");
 

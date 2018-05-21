@@ -4,11 +4,17 @@
     {
         public int Id { get; set; }
 
-        public ATS Ats { get; set; }
+        public virtual ATS Ats { get; set; }
 
-        public Person Person { get; set; }
+        public int ATSId { get; set; }
 
-        public PhoneNumber PhoneNumber { get; set; }
+        public virtual Person Person { get; set; }
+
+        public int PersonId { get; set; }
+
+        public virtual PhoneNumber PhoneNumber { get; set; }
+
+        public int PhoneNumberId { get; set; }
 
         public bool IntercityAccess { get; set; }
 

@@ -1,8 +1,9 @@
 ﻿@using ATS_Master.Web.Controllers
-@using ATS_Master.Web.Models
 @using Reinforced.Lattice.Commands
 @using Reinforced.Lattice.Configuration
+@using Reinforced.Lattice.Editing.Editors.Check
 @using Reinforced.Lattice.Editing.Editors.PlainText
+@using Reinforced.Lattice.Editing.Editors.SelectList
 @using Reinforced.Lattice.Editing.Form
 @using Reinforced.Lattice.Mvc
 @using Reinforced.Lattice.Plugins.Checkboxify
@@ -10,10 +11,10 @@
 @using Reinforced.Lattice.Plugins.Toolbar
 @using Reinforced.Lattice.Templates
 @using Reinforced.Lattice.Templates.BuiltIn
-@model PersonsIndexViewModel
+@model ATS_Master.Web.Models.PhoneNumbersIndexViewModel
 
 @{
-    ViewBag.Title = "Persons";
+    ViewBag.Title = "Phone Numbers";
 
     var tableConf = Model.Table;
 
@@ -27,41 +28,40 @@
 
     tableConf.AddUiColumn<string>("Actions")
         .Razor(@<div>
-                   <button class="btn btn-xs btn-warning _beginEdit">
-                       <span class="glyphicon glyphicon-pencil"></span>
-                   </button>
-                   <button class="btn btn-xs btn-danger _remove">
-                       <span class="glyphicon glyphicon-remove"></span>
-                   </button>
-               </div>)
+                    <button class="btn btn-xs btn-warning _beginEdit">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-xs btn-danger _remove">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>)
         .SubscribeCellEvent(x => x.Command("click", "Remove").Selector("._remove"))
         ;
 
-    tableConf.EditingForm(f =>
+    tableConf.EditingForm(configuration =>
     {
-        f.EditPlainText(x => x.Name);
-        f.EditPlainText(x => x.Middlename);
-        f.EditPlainText(x => x.Surname);
-        f.EditPlainText(x => x.Gender);
-        f.EditPlainText(x => x.Age);
+        configuration.EditPlainText(row => row.Number);
+        configuration.EditPlainText(row => row.PhoneType);
+        configuration.EditSelectList(row => row.Address).Items(Model.AllAddresses);
+        configuration.EditCheck(row => row.IsFree);
 
-        f.RenderTo("#ltcModalHolder");
-    }, c => c.Event("click").Selector("._beginEdit"));
+        configuration.RenderTo("#ltcModalHolder");
+    }, subscription => subscription.Event("click").Selector("._beginEdit"));
 
-    tableConf.Command("Remove", x => x.ConfigureRemoval());
-    tableConf.Command("RemoveSelected", x => x.ConfigureRemoval());
+    tableConf.Command("Remove", configurator => configurator.ConfigureRemoval());
+    tableConf.Command("RemoveSelected", configurator => configurator.ConfigureRemoval());
 
     tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
 }
 
-<h2>Persons</h2>
+<h2>Phone Numbers</h2>
 
 <div class="row">
     <div class="col-md-12 text-center" id="tableRefreshButton"></div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div id="personsTable"></div>
+        <div id="phoneNumbersTable"></div>
     </div>
 </div>
 
@@ -82,8 +82,8 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to remove person?
-                        <br/>
+                        Are you sure you want to remove phone number?
+                        <br />
                         <fieldset class="form-horizontal">
                             @window.Editors()
                         </fieldset>
@@ -103,5 +103,5 @@
 
     @{ Html.RenderTemplates("lt", "Lattice_Templates_Bootstrap"); }
 
-    @Model.Table.InitializationScript("personsTable", "window.$$table");
+    @Model.Table.InitializationScript("phoneNumbersTable", "window.$$table");
 }

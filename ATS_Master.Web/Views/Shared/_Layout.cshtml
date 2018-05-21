@@ -7,6 +7,9 @@
     <title>@ViewBag.Title - NSU.ATS-Master</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
+    <script src="~/Scripts/tableassets.js"></script>
+
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     
     <script type="text/javascript" src="~/Scripts/Reinforced.Lattice/reinforced.lattice.js"></script>
@@ -26,7 +29,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">@Html.ActionLink("NSU.ATS-Master", "Index", "Home", new { area = "" }, new { @class = "active" })</li>
+                    <li>@Html.ActionLink("Persons", "Index", "Persons")</li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Addresses", "Index", "Addresses")</li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Phone Numbers", "Index", "PhoneNumbers")</li>
                 </ul>
             </div>
         </div>
@@ -39,6 +48,9 @@
             <p>&copy; @DateTime.Now.Year - NSU.ATS-Master</p>
         </footer>
     </div>
+    
+    <div class="modal fade" tabindex="-1" id="ltcModalHolder" role="dialog">
+    </div><!-- /.modal -->
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>

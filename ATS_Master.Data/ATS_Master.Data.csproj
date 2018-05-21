@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201805090349333_InitialCreate.Designer.cs">
       <DependentUpon>201805090349333_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805211504365_VirtualProperties.cs" />
+    <Compile Include="Migrations\201805211504365_VirtualProperties.Designer.cs">
+      <DependentUpon>201805211504365_VirtualProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805211509588_PhoneTypeEnum.cs" />
+    <Compile Include="Migrations\201805211509588_PhoneTypeEnum.Designer.cs">
+      <DependentUpon>201805211509588_PhoneTypeEnum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +87,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805090349333_InitialCreate.resx">
       <DependentUpon>201805090349333_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805211504365_VirtualProperties.resx">
+      <DependentUpon>201805211504365_VirtualProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805211509588_PhoneTypeEnum.resx">
+      <DependentUpon>201805211509588_PhoneTypeEnum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

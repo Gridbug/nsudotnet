@@ -13,11 +13,17 @@ namespace ATS_Master.Data.Entities
 
         public string ATSType { get; set; }
 
-        public CityATSAttributes CityAtsAttributes { get; set; }
+        public virtual CityATSAttributes CityAtsAttributes { get; set; }
 
-        public DepartmentalATSAttributes DepartmentalAtsAttributes { get; set; }
+        public int CityATSAttributesId { get; set; }
 
-        public InstitutionalATSAttributes InstitutionalAtsAttributes { get; set; }
+        public virtual DepartmentalATSAttributes DepartmentalAtsAttributes { get; set; }
+
+        public int DepartmentalATSAttributesId { get; set; }
+
+        public virtual InstitutionalATSAttributes InstitutionalAtsAttributes { get; set; }
+
+        public int InstitutionalATSAttributesId { get; set; }
 
         public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
     }

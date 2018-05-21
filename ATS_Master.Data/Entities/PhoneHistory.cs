@@ -6,7 +6,9 @@ namespace ATS_Master.Data.Entities
     {
         public int Id { get; set; }
 
-        public PhoneNumber PhoneNumber { get; set; }
+        public virtual PhoneNumber PhoneNumber { get; set; }
+
+        public int PhoneNumberId { get; set; }
 
         public int Duration { get; set; }
 
