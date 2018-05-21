@@ -1,4 +1,7 @@
-﻿@using ATS_Master.Web.Controllers
+﻿@using System.Linq.Expressions
+@using System.Security.Policy
+@using ATS_Master.Data.Entities
+@using ATS_Master.Web.Controllers
 @using Reinforced.Lattice.Commands
 @using Reinforced.Lattice.Configuration
 @using Reinforced.Lattice.Editing.Editors.Check
@@ -26,32 +29,35 @@
 
     tableConf.Checkboxify();
 
+    tableConf.Column(row => row.PhoneType)
+        .FormatEnum(item => item.Value, item => item.Text);
+
     tableConf.AddUiColumn<string>("Actions")
-        .Razor(@<div>
-                    <button class="btn btn-xs btn-warning _beginEdit">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-xs btn-danger _remove">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </div>)
-        .SubscribeCellEvent(x => x.Command("click", "Remove").Selector("._remove"))
-        ;
+    .Razor(@<div>
+                <button class="btn btn-xs btn-warning _beginEdit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-xs btn-danger _remove">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>)
+    .SubscribeCellEvent(x => x.Command("click", "Remove").Selector("._remove"))
+    ;
 
-    tableConf.EditingForm(configuration =>
-    {
-        configuration.EditPlainText(row => row.Number);
-        configuration.EditPlainText(row => row.PhoneType);
-        configuration.EditSelectList(row => row.Address).Items(Model.AllAddresses);
-        configuration.EditCheck(row => row.IsFree);
+tableConf.EditingForm(configuration =>
+{
+configuration.EditPlainText(row => row.Number);
+configuration.EditSelectList(row => row.PhoneType).Items(Model.AllPhoneTypes);
+configuration.EditSelectList(row => row.AddressId).Items(Model.AllAddresses);
+configuration.EditCheck(row => row.IsFree);
 
-        configuration.RenderTo("#ltcModalHolder");
-    }, subscription => subscription.Event("click").Selector("._beginEdit"));
+configuration.RenderTo("#ltcModalHolder");
+}, subscription => subscription.Event("click").Selector("._beginEdit"));
 
-    tableConf.Command("Remove", configurator => configurator.ConfigureRemoval());
-    tableConf.Command("RemoveSelected", configurator => configurator.ConfigureRemoval());
+tableConf.Command("Remove", configurator => configurator.ConfigureRemoval());
+tableConf.Command("RemoveSelected", configurator => configurator.ConfigureRemoval());
 
-    tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
+tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
 }
 
 <h2>Phone Numbers</h2>

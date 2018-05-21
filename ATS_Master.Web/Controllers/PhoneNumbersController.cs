@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using ATS_Master.Data;
 using ATS_Master.Data.Entities;
 using ATS_Master.Web.Models;
@@ -38,7 +39,9 @@ namespace ATS_Master.Web.Controllers
             {
                 Text = address.Street,
                 Value = address.Id.ToString()
-            }).ToArray()
+            }).ToArray(),
+
+            AllPhoneTypes = EnumHelper.GetSelectList(typeof(PhoneType)).ToArray()
         };
 
         public ActionResult HandleTable()
@@ -68,13 +71,17 @@ namespace ATS_Master.Web.Controllers
                 currentPhoneNumber = _context.PhoneNumbers.FirstOrDefault(number => number.Id == phoneNumberRow.Id);
             }
 
-            currentPhoneNumber.Address = phoneNumberRow.Address;
+            currentPhoneNumber.AddressId = phoneNumberRow.AddressId;
             currentPhoneNumber.Number = phoneNumberRow.Number;
             currentPhoneNumber.PhoneType = phoneNumberRow.PhoneType;
             currentPhoneNumber.IsFree = phoneNumberRow.IsFree;
             _context.SaveChanges();
 
             phoneNumberRow.Id = currentPhoneNumber.Id;
+
+            phoneNumberRow.PhoneNumberAddressShort = _context.Addresses
+                .Where(address => address.Id == phoneNumberRow.AddressId).Select(address => address.Street)
+                .FirstOrDefault();
 
             return latticeData.Adjust(wrapper => wrapper
                 .Update(phoneNumberRow)
