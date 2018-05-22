@@ -90,7 +90,7 @@ namespace ATS_Master.Web.Controllers
             _context.SaveChanges();
 
             return latticeData.Adjust(wrapper => wrapper
-                .Update(subject)
+                .Remove(subject)
 //                .Message(LatticeMessage.User("success", "Remove", $"Order removed because of {confirmationData.Cause}"))
             );
         }
@@ -105,7 +105,7 @@ namespace ATS_Master.Web.Controllers
             _context.Database.ExecuteSqlCommand($"DELETE FROM Addresses WHERE Id IN ({ids})");
             
             return latticeData.Adjust(wrapper => wrapper
-                .Update(selectedRows)
+                .Remove(selectedRows)
 //                .Message(LatticeMessage.User("success", "Remove", $"{selectedRows.Length} orders removed!"))
             );
         }
