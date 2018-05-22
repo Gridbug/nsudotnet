@@ -3,6 +3,7 @@
 @using Reinforced.Lattice.Commands
 @using Reinforced.Lattice.Configuration
 @using Reinforced.Lattice.Editing.Editors.PlainText
+@using Reinforced.Lattice.Editing.Editors.SelectList
 @using Reinforced.Lattice.Editing.Form
 @using Reinforced.Lattice.Mvc
 @using Reinforced.Lattice.Plugins.Checkboxify
@@ -25,6 +26,9 @@
 
     tableConf.Checkboxify();
 
+    tableConf.Column(row => row.Gender)
+        .FormatEnum(item => item.Value, item => item.Text);
+
     tableConf.AddUiColumn<string>("Actions")
         .Razor(@<div>
                    <button class="btn btn-xs btn-warning _beginEdit">
@@ -42,7 +46,7 @@
         f.EditPlainText(x => x.Name);
         f.EditPlainText(x => x.Middlename);
         f.EditPlainText(x => x.Surname);
-        f.EditPlainText(x => x.Gender);
+        f.EditSelectList(x => x.Gender).Items(Model.AllPersonGenders);
         f.EditPlainText(x => x.Age);
 
         f.RenderTo("#ltcModalHolder");

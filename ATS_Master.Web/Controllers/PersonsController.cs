@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using ATS_Master.Data;
 using ATS_Master.Data.Entities;
 using ATS_Master.Web.Models;
@@ -32,6 +33,7 @@ namespace ATS_Master.Web.Controllers
 
         public PersonsIndexViewModel GenerateViewModel() => new PersonsIndexViewModel()
         {
+            AllPersonGenders = EnumHelper.GetSelectList(typeof(PersonGender)).ToArray(),
             Table = new Configurator<Person, PersonRow>()
                     .Configure()
                     .Url(Url.Action(actionName: "HandleTable"))

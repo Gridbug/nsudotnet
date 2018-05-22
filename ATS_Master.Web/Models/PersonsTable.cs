@@ -16,7 +16,7 @@ namespace ATS_Master.Web.Models
 
         public string Middlename { get; set; }
 
-        public string Gender { get; set; }
+        public PersonGender Gender { get; set; }
 
         public int Age { get; set; }
     }
@@ -24,6 +24,8 @@ namespace ATS_Master.Web.Models
     public class PersonsIndexViewModel
     {
         public Configurator<Person, PersonRow> Table { get; set; }
+
+        public SelectListItem[] AllPersonGenders { get; set; }
     }
 
     public static class PersonsTable

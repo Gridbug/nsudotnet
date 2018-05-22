@@ -10,8 +10,14 @@
 
         public string Middlename { get; set; }
 
-        public string Gender { get; set; }
+        public PersonGender Gender { get; set; }
 
         public int Age { get; set; }
+    }
+
+    public enum PersonGender
+    {
+        Man,
+        Woman
     }
 }

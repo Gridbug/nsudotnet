@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201805211509588_PhoneTypeEnum.Designer.cs">
       <DependentUpon>201805211509588_PhoneTypeEnum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805220500587_PersonGenderEnum.cs" />
+    <Compile Include="Migrations\201805220500587_PersonGenderEnum.Designer.cs">
+      <DependentUpon>201805220500587_PersonGenderEnum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805211509588_PhoneTypeEnum.resx">
       <DependentUpon>201805211509588_PhoneTypeEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805220500587_PersonGenderEnum.resx">
+      <DependentUpon>201805220500587_PersonGenderEnum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
