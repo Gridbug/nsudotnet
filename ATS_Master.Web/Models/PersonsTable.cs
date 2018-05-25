@@ -55,6 +55,18 @@ namespace ATS_Master.Web.Models
 
             configurator.PrettifyTitles();
             configurator.AppendEmptyFilters();
+
+            configurator.DatePicker(new DatepickerOptions(
+                createDatepicker: "ltcCreateDatePicker",
+                putToDatepicker: "ltcPutDateToDatepicker",
+                getFromDatePicker: "ltcGetDateFromDatepicker",
+                destroyDatepicker: "ltcDestroyDatepicker"));
+
+//            configurator.DatePicker(new DatepickerOptions(
+//                createDatepicker: "ltcCreateDateTimePicker",
+//                putToDatepicker: "ltcPutDateToDateTimePicker",
+//                getFromDatePicker: "ltcGetDateFromDateTimePicker",
+//                destroyDatepicker: "ltcDestroyDateTimePicker"));
         }
     }
 }

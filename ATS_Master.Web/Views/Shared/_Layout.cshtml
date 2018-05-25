@@ -7,12 +7,15 @@
     <title>@ViewBag.Title - NSU.ATS-Master</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    
-    <script src="~/Scripts/tableassets.js"></script>
 
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    
+
     <script type="text/javascript" src="~/Scripts/Reinforced.Lattice/reinforced.lattice.js"></script>
+
+    <script src="~/Scripts/tableassets.js"></script>
+
+    @* <link href="~/Scripts/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" /> *@
+    <link href="~/Scripts/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
 
     @RenderSection("scripts", required: false)
 </head>
@@ -30,12 +33,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Persons", "Index", "Persons")</li>
-                </ul>
-                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Addresses", "Index", "Addresses")</li>
-                </ul>
-                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Phone Numbers", "Index", "PhoneNumbers")</li>
+                    <li>@Html.ActionLink("Phone History", "Index", "PhoneHistory")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">ATS Attributes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("City ATS", "Index", "Persons")</li>
+                            <li>@Html.ActionLink("Departmental ATS", "Index", "Persons")</li>
+                            <li>@Html.ActionLink("Institutional ATS", "Index", "Persons")</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -53,6 +61,11 @@
     </div><!-- /.modal -->
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
     <script src="~/Scripts/bootstrap.min.js"></script>
+
+@* <script src="~/Scripts/datetimepicker/js/bootstrap-datetimepicker.min.js"></script> *@
+<script src="~/Scripts/datepicker/js/bootstrap-datepicker.min.js"></script>
+    
 </body>
 </html>

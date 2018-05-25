@@ -138,7 +138,23 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker.css.map" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker3.css.map" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker3.standalone.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker.css" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker.min.css" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker.standalone.css" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker3.css" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker3.min.css" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Scripts\datepicker\css\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="Scripts\datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Scripts\datepicker\js\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\datetimepicker\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -157,6 +173,7 @@
     <Content Include="Views\Persons\Index.cshtml" />
     <Content Include="Views\Addresses\Index.cshtml" />
     <Content Include="Views\PhoneNumbers\Index.cshtml" />
+    <Content Include="Views\PhoneHistory\Index.cshtml" />
     <None Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -179,12 +196,17 @@
     <Compile Include="Controllers\MyFancyUtilities.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
+    <Compile Include="Controllers\PhoneHistoryController.cs" />
     <Compile Include="Controllers\PhoneNumbersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddressesTable.cs" />
+    <Compile Include="Models\DepartmentalATSAttributesTable.cs" />
+    <Compile Include="Models\CityATSAttributesTable.cs" />
+    <Compile Include="Models\InstitutionalATSAttributesTable.cs" />
     <Compile Include="Models\PersonsTable.cs" />
+    <Compile Include="Models\PhoneHistoryTable.cs" />
     <Compile Include="Models\PhoneNumbersTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

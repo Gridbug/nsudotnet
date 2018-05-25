@@ -1,4 +1,5 @@
 ﻿@using ATS_Master.Web.Controllers
+@using Reinforced.Lattice.CellTemplating
 @using Reinforced.Lattice.Commands
 @using Reinforced.Lattice.Configuration
 @using Reinforced.Lattice.Editing.Editors.Check
@@ -11,10 +12,10 @@
 @using Reinforced.Lattice.Plugins.Toolbar
 @using Reinforced.Lattice.Templates
 @using Reinforced.Lattice.Templates.BuiltIn
-@model ATS_Master.Web.Models.PhoneNumbersIndexViewModel
+@model ATS_Master.Web.Models.PhoneHistoryIndexViewModel
 
 @{
-    ViewBag.Title = "Phone Numbers";
+    ViewBag.Title = "Phone History";
 
     var tableConf = Model.Table;
 
@@ -26,45 +27,50 @@
 
     tableConf.Checkboxify();
 
-    tableConf.Column(row => row.PhoneType)
-        .FormatEnum(item => item.Value, item => item.Text);
+    tableConf.Column(c => c.PhoneDate)
+        .Format("`{#}.getDate() + '/' + ({#}.getMonth() + 1) + '/' + {#}.getFullYear()`");
 
     tableConf.AddUiColumn<string>("Actions")
-    .Razor(@<div>
-                <button class="btn btn-xs btn-warning _beginEdit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <button class="btn btn-xs btn-danger _remove">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-            </div>)
-    .SubscribeCellEvent(x => x.Command("click", "Remove").Selector("._remove"))
-    ;
+.Razor(@<div>
+                    <button class="btn btn-xs btn-warning _beginEdit">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-xs btn-danger _remove">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>)
+        .SubscribeCellEvent(x => x.Command("click", "Remove").Selector("._remove"))
+        ;
 
-tableConf.EditingForm(configuration =>
-{
-configuration.EditPlainText(row => row.Number);
-configuration.EditSelectList(row => row.PhoneType).Items(Model.AllPhoneTypes);
-configuration.EditSelectList(row => row.AddressId).Items(Model.AllAddresses);
-configuration.EditCheck(row => row.IsFree);
+    tableConf.EditingForm(configuration =>
+    {
+      configuration.EditSelectList(row => row.PhoneNumberId).Items(Model.AllPhoneNumbers);
+      configuration.EditPlainText(row => row.PhoneDate);
+      configuration.EditPlainText(row => row.Duration);
 
-configuration.RenderTo("#ltcModalHolder");
-}, subscription => subscription.Event("click").Selector("._beginEdit"));
+      configuration.EditPlainText(row => row.Caller);
+      configuration.EditPlainText(row => row.CallerCity);
 
-tableConf.Command("Remove", configurator => configurator.ConfigureRemoval());
-tableConf.Command("RemoveSelected", configurator => configurator.ConfigureRemoval());
+      configuration.EditPlainText(row => row.Callee);
+      configuration.EditPlainText(row => row.CalleeCity);
 
-tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
+      configuration.RenderTo("#ltcModalHolder");
+    }, subscription => subscription.Event("click").Selector("._beginEdit"));
+
+    tableConf.Command("Remove", configurator => configurator.ConfigureRemoval());
+    tableConf.Command("RemoveSelected", configurator => configurator.ConfigureRemoval());
+
+    tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
 }
 
-<h2>Phone Numbers</h2>
+<h2>Phone History</h2>
 
 <div class="row">
     <div class="col-md-12 text-center" id="tableRefreshButton"></div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div id="phoneNumbersTable"></div>
+        <div id="phoneHistoryTable"></div>
     </div>
 </div>
 
@@ -85,7 +91,7 @@ tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
                         </h4>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to remove phone number?
+                        Are you sure you want to remove phone call?
                         <br />
                         <fieldset class="form-horizontal">
                             @window.Editors()
@@ -106,5 +112,5 @@ tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
 
     @{ Html.RenderTemplates("lt", "Lattice_Templates_Bootstrap"); }
 
-    @Model.Table.InitializationScript("phoneNumbersTable", "window.$$table");
+    @Model.Table.InitializationScript("phoneHistoryTable", "window.$$table");
 }
