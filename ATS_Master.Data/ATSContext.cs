@@ -13,11 +13,11 @@ namespace ATS_Master.Data
 
         public DbSet<ATS> AtsStations { get; set; }
 
-        public DbSet<CityATSAttributes> CityAtsAttributeses { get; set; }
+        public DbSet<CityATSAttributes> CityATSAttributes { get; set; }
 
-        public DbSet<DepartmentalATSAttributes> DepartmentalAtsAttributeses { get; set; }
+        public DbSet<DepartmentalATSAttributes> DepartmentalATSAttributes { get; set; }
 
-        public DbSet<InstitutionalATSAttributes> InstitutionalAtsAttributeses { get; set; }
+        public DbSet<InstitutionalATSAttributes> InstitutionalATSAttributes { get; set; }
 
         public DbSet<Person> Persons { get; set; }
 
