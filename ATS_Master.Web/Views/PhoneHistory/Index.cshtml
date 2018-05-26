@@ -28,7 +28,7 @@
     tableConf.Checkboxify();
 
     tableConf.Column(c => c.PhoneDate)
-        .Format("`{#}.getDate() + '/' + ({#}.getMonth() + 1) + '/' + {#}.getFullYear()`");
+        .Format("`{#}.getHours() + ':' + {#}.getMinutes() + ' ' + {#}.getDate() + '.' + ({#}.getMonth() + 1) + '.' + {#}.getFullYear()`");
 
     tableConf.AddUiColumn<string>("Actions")
 .Razor(@<div>

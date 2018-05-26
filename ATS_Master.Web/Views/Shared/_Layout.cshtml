@@ -15,7 +15,8 @@
     <script src="~/Scripts/tableassets.js"></script>
 
     @* <link href="~/Scripts/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" /> *@
-    <link href="~/Scripts/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    @* <link href="~/Scripts/datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" /> *@
+    <link rel="stylesheet" href="/Content/bootstrap-datetimepicker.css" />
 
     @RenderSection("scripts", required: false)
 </head>
@@ -65,7 +66,9 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
 
 @* <script src="~/Scripts/datetimepicker/js/bootstrap-datetimepicker.min.js"></script> *@
-<script src="~/Scripts/datepicker/js/bootstrap-datepicker.min.js"></script>
+@* <script src="~/Scripts/datepicker/js/bootstrap-datepicker.min.js"></script> *@
+<script type="text/javascript" src="/Scripts/moment.min.js"></script>
+<script type="text/javascript" src="/Scripts/bootstrap-datetimepicker.min.js"></script>
     
 </body>
 </html>
