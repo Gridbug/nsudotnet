@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual AtsUser AtsUser { get; set; }
 
         public int UserId { get; set; }
     }

@@ -1,12 +1,8 @@
 ﻿namespace ATS_Master.Data.Entities
 {
-    public class User
+    public class AtsUser
     {
         public int Id { get; set; }
-
-        public virtual Ats Ats { get; set; }
-
-        public int AtsId { get; set; }
 
         public virtual Person Person { get; set; }
 

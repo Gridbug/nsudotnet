@@ -29,7 +29,7 @@ namespace ATS_Master.Data
 
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<AtsUser> AtsUsers { get; set; }
 
         public DbSet<UserAccounting> UserAccountings { get; set; }
     }

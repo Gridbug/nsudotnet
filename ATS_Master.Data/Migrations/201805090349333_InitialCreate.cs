@@ -117,11 +117,11 @@ namespace ATS_Master.Data.Migrations
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
+                .ForeignKey("dbo.AtsUsers", t => t.User_Id)
                 .Index(t => t.User_Id);
             
             CreateTable(
-                "dbo.Users",
+                "dbo.AtsUsers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -151,7 +151,7 @@ namespace ATS_Master.Data.Migrations
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
+                .ForeignKey("dbo.AtsUsers", t => t.User_Id)
                 .Index(t => t.User_Id);
             
             CreateTable(
@@ -163,19 +163,19 @@ namespace ATS_Master.Data.Migrations
                         User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
+                .ForeignKey("dbo.AtsUsers", t => t.User_Id)
                 .Index(t => t.User_Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.UserAccountings", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.PhoneInstallationQueues", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.PhoneInstallationPreferentialQueues", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.Users", "PhoneNumber_Id", "dbo.PhoneNumbers");
-            DropForeignKey("dbo.Users", "Person_Id", "dbo.People");
-            DropForeignKey("dbo.Users", "Ats_Id", "dbo.Ats");
+            DropForeignKey("dbo.UserAccountings", "User_Id", "dbo.AtsUsers");
+            DropForeignKey("dbo.PhoneInstallationQueues", "User_Id", "dbo.AtsUsers");
+            DropForeignKey("dbo.PhoneInstallationPreferentialQueues", "User_Id", "dbo.AtsUsers");
+            DropForeignKey("dbo.AtsUsers", "PhoneNumber_Id", "dbo.PhoneNumbers");
+            DropForeignKey("dbo.AtsUsers", "Person_Id", "dbo.People");
+            DropForeignKey("dbo.AtsUsers", "Ats_Id", "dbo.Ats");
             DropForeignKey("dbo.PhoneHistories", "PhoneNumber_Id", "dbo.PhoneNumbers");
             DropForeignKey("dbo.PhoneNumbers", "ATS_Id", "dbo.Ats");
             DropForeignKey("dbo.PhoneNumbers", "Address_Id", "dbo.Addresses");
@@ -185,9 +185,9 @@ namespace ATS_Master.Data.Migrations
             DropIndex("dbo.UserAccountings", new[] { "User_Id" });
             DropIndex("dbo.PhoneInstallationQueues", new[] { "User_Id" });
             DropIndex("dbo.PhoneInstallationPreferentialQueues", new[] { "User_Id" });
-            DropIndex("dbo.Users", new[] { "PhoneNumber_Id" });
-            DropIndex("dbo.Users", new[] { "Person_Id" });
-            DropIndex("dbo.Users", new[] { "Ats_Id" });
+            DropIndex("dbo.AtsUsers", new[] { "PhoneNumber_Id" });
+            DropIndex("dbo.AtsUsers", new[] { "Person_Id" });
+            DropIndex("dbo.AtsUsers", new[] { "Ats_Id" });
             DropIndex("dbo.PhoneHistories", new[] { "PhoneNumber_Id" });
             DropIndex("dbo.PhoneNumbers", new[] { "ATS_Id" });
             DropIndex("dbo.PhoneNumbers", new[] { "Address_Id" });
@@ -196,7 +196,7 @@ namespace ATS_Master.Data.Migrations
             DropIndex("dbo.Ats", new[] { "CityAtsAttributes_Id" });
             DropTable("dbo.UserAccountings");
             DropTable("dbo.PhoneInstallationQueues");
-            DropTable("dbo.Users");
+            DropTable("dbo.AtsUsers");
             DropTable("dbo.PhoneInstallationPreferentialQueues");
             DropTable("dbo.PhoneHistories");
             DropTable("dbo.People");

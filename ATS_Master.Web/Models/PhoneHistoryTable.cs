@@ -48,7 +48,7 @@ namespace ATS_Master.Web.Models
 
             configurator.Column(row => row.Id).DataOnly();
             configurator.Column(row => row.PhoneNumberId).DataOnly();
-            configurator.Column(row => row.PhoneNumber).Title("User");
+            configurator.Column(row => row.PhoneNumber).Title("AtsUser");
 
             configurator.ProjectDataWith(calls => calls.Select(phoneCall => new PhoneHistoryRow()
             {

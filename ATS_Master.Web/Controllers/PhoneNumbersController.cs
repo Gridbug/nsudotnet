@@ -98,7 +98,7 @@ namespace ATS_Master.Web.Controllers
 
             return latticeData.Adjust(wrapper => wrapper
                 .Update(phoneNumberRow)
-//                .Message(LatticeMessage.User("success", "Editing", "Person saved!"))
+//                .Message(LatticeMessage.AtsUser("success", "Editing", "Person saved!"))
             );
         }
 
@@ -114,7 +114,7 @@ namespace ATS_Master.Web.Controllers
 
             return latticeData.Adjust(wrapper => wrapper
                 .Remove(subject)
-//                .Message(LatticeMessage.User("success", "Remove", $"Order removed because of {confirmationData.Cause}"))
+//                .Message(LatticeMessage.AtsUser("success", "Remove", $"Order removed because of {confirmationData.Cause}"))
             );
         }
 
@@ -129,7 +129,7 @@ namespace ATS_Master.Web.Controllers
 
             return latticeData.Adjust(wrapper => wrapper
                 .Remove(selectedRows)
-//                .Message(LatticeMessage.User("success", "Remove", $"{selectedRows.Length} orders removed!"))
+//                .Message(LatticeMessage.AtsUser("success", "Remove", $"{selectedRows.Length} orders removed!"))
             );
         }
     }

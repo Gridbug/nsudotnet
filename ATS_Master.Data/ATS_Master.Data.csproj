@@ -60,7 +60,7 @@
     <Compile Include="Entities\PhoneInstallationPreferentialQueue.cs" />
     <Compile Include="Entities\PhoneInstallationQueue.cs" />
     <Compile Include="Entities\PhoneNumber.cs" />
-    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\AtsUser.cs" />
     <Compile Include="Entities\UserAccounting.cs" />
     <Compile Include="Migrations\201805090349333_InitialCreate.cs" />
     <Compile Include="Migrations\201805090349333_InitialCreate.Designer.cs">
@@ -89,6 +89,14 @@
     <Compile Include="Migrations\201805271503558_NamingSchemeFix.cs" />
     <Compile Include="Migrations\201805271503558_NamingSchemeFix.Designer.cs">
       <DependentUpon>201805271503558_NamingSchemeFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805271534186_RemovedUserAtsLink.cs" />
+    <Compile Include="Migrations\201805271534186_RemovedUserAtsLink.Designer.cs">
+      <DependentUpon>201805271534186_RemovedUserAtsLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805271656135_AtsUserChangedName.cs" />
+    <Compile Include="Migrations\201805271656135_AtsUserChangedName.Designer.cs">
+      <DependentUpon>201805271656135_AtsUserChangedName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -121,6 +129,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805271503558_NamingSchemeFix.resx">
       <DependentUpon>201805271503558_NamingSchemeFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271534186_RemovedUserAtsLink.resx">
+      <DependentUpon>201805271534186_RemovedUserAtsLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805271656135_AtsUserChangedName.resx">
+      <DependentUpon>201805271656135_AtsUserChangedName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
