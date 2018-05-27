@@ -46,6 +46,7 @@ tableConf.EditingForm(configuration =>
 configuration.EditPlainText(row => row.Number);
 configuration.EditSelectList(row => row.PhoneType).Items(Model.AllPhoneTypes);
 configuration.EditSelectList(row => row.AddressId).Items(Model.AllAddresses);
+configuration.EditSelectList(row => row.AtsId).Items(Model.AllAts);
 configuration.EditCheck(row => row.IsFree);
 
 configuration.RenderTo("#ltcModalHolder");

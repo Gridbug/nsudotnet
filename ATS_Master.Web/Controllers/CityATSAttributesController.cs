@@ -15,9 +15,9 @@ namespace ATS_Master.Web.Controllers
 {
     public class CityATSAttributesController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public CityATSAttributesController(ATSContext context)
+        public CityATSAttributesController(AtsContext context)
         {
             _context = context;
         }
@@ -29,14 +29,14 @@ namespace ATS_Master.Web.Controllers
 
         public CityATSAttributesIndexViewModel GenerateViewModel() => new CityATSAttributesIndexViewModel()
         {
-            Table = new Configurator<CityATSAttributes, CityATSAttributesRow>()
+            Table = new Configurator<CityAtsAttributes, CityATSAttributesRow>()
                     .Configure()
                     .Url(Url.Action(actionName: "HandleTable"))
         };
 
         public ActionResult HandleTable()
         {
-            var conf = new Configurator<CityATSAttributes, CityATSAttributesRow>()
+            var conf = new Configurator<CityAtsAttributes, CityATSAttributesRow>()
                 .Configure();
 
             var handler = conf.CreateMvcHandler(ControllerContext);
@@ -45,20 +45,20 @@ namespace ATS_Master.Web.Controllers
             handler.AddCommandHandler("Remove", Remove);
             handler.AddCommandHandler("RemoveSelected", RemoveSelected);
 
-            return handler.Handle(_context.CityATSAttributes);
+            return handler.Handle(_context.CityAtsAttributes);
         }
 
-        public TableAdjustment EditCityATSAttribute(LatticeData<CityATSAttributes, CityATSAttributesRow> latticeData, CityATSAttributesRow cityATSAttributesRow)
+        public TableAdjustment EditCityATSAttribute(LatticeData<CityAtsAttributes, CityATSAttributesRow> latticeData, CityATSAttributesRow cityATSAttributesRow)
         {
-            CityATSAttributes currentAttribute = null;
+            CityAtsAttributes currentAttribute = null;
             if (cityATSAttributesRow.Id == 0)
             {
-                currentAttribute = new CityATSAttributes();
-                _context.CityATSAttributes.Add(currentAttribute);
+                currentAttribute = new CityAtsAttributes();
+                _context.CityAtsAttributes.Add(currentAttribute);
             }
             else
             {
-                currentAttribute = _context.CityATSAttributes.FirstOrDefault(x => x.Id == cityATSAttributesRow.Id);
+                currentAttribute = _context.CityAtsAttributes.FirstOrDefault(x => x.Id == cityATSAttributesRow.Id);
             }
 
             _context.SaveChanges();
@@ -71,14 +71,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment Remove(LatticeData<CityATSAttributes, CityATSAttributesRow> latticeData)
+        public TableAdjustment Remove(LatticeData<CityAtsAttributes, CityATSAttributesRow> latticeData)
         {
             var confirmationData = latticeData.CommandConfirmation<RemovalConfirmationViewModel>();
 
             var subj = latticeData.CommandSubject();
-            var cityATSAttributes = _context.CityATSAttributes.FirstOrDefault(x => x.Id == subj.Id);
+            var cityATSAttributes = _context.CityAtsAttributes.FirstOrDefault(x => x.Id == subj.Id);
 
-            _context.CityATSAttributes.Remove(cityATSAttributes);
+            _context.CityAtsAttributes.Remove(cityATSAttributes);
             _context.SaveChanges();
 
             return latticeData.Adjust(x => x
@@ -87,14 +87,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment RemoveSelected(LatticeData<CityATSAttributes, CityATSAttributesRow> latticeData)
+        public TableAdjustment RemoveSelected(LatticeData<CityAtsAttributes, CityATSAttributesRow> latticeData)
         {
             var selectedRows = latticeData.Selection().ToArray();
             var selectedAttributesIds = selectedRows.Select(x => x.Id);
 
             var ids = string.Join(",", selectedAttributesIds);
 
-            _context.Database.ExecuteSqlCommand($"DELETE FROM CityATSAttributes WHERE Id IN ({ids})");
+            _context.Database.ExecuteSqlCommand($"DELETE FROM CityAtsAttributes WHERE Id IN ({ids})");
 
             return latticeData.Adjust(x => x
                 .Remove(selectedRows)

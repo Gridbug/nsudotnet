@@ -15,14 +15,14 @@ namespace ATS_Master.Web.Controllers
 {
     public class InstitutionalATSAttributesController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public InstitutionalATSAttributesController(ATSContext context)
+        public InstitutionalATSAttributesController(AtsContext context)
         {
             _context = context;
         }
 
-        // GET: InstitutionalATSAttributes
+        // GET: InstitutionalAtsAttributes
         public ActionResult Index()
         {
             return View(GenerateViewModel());
@@ -30,14 +30,14 @@ namespace ATS_Master.Web.Controllers
 
         public InstitutionalATSAttributesIndexViewModel GenerateViewModel() => new InstitutionalATSAttributesIndexViewModel()
         {
-            Table = new Configurator<InstitutionalATSAttributes, InstitutionalATSAttributesRow>()
+            Table = new Configurator<InstitutionalAtsAttributes, InstitutionalATSAttributesRow>()
                     .Configure()
                     .Url(Url.Action(actionName: "HandleTable"))
         };
 
         public ActionResult HandleTable()
         {
-            var conf = new Configurator<InstitutionalATSAttributes, InstitutionalATSAttributesRow>()
+            var conf = new Configurator<InstitutionalAtsAttributes, InstitutionalATSAttributesRow>()
                 .Configure();
 
             var handler = conf.CreateMvcHandler(ControllerContext);
@@ -46,20 +46,20 @@ namespace ATS_Master.Web.Controllers
             handler.AddCommandHandler("Remove", Remove);
             handler.AddCommandHandler("RemoveSelected", RemoveSelected);
 
-            return handler.Handle(_context.InstitutionalATSAttributes);
+            return handler.Handle(_context.InstitutionalAtsAttributes);
         }
 
-        public TableAdjustment EditInstitutionalATSAttributes(LatticeData<InstitutionalATSAttributes, InstitutionalATSAttributesRow> latticeData, InstitutionalATSAttributesRow institutionalATSAttributesRow)
+        public TableAdjustment EditInstitutionalATSAttributes(LatticeData<InstitutionalAtsAttributes, InstitutionalATSAttributesRow> latticeData, InstitutionalATSAttributesRow institutionalATSAttributesRow)
         {
-            InstitutionalATSAttributes currentAttribute = null;
+            InstitutionalAtsAttributes currentAttribute = null;
             if (institutionalATSAttributesRow.Id == 0)
             {
-                currentAttribute = new InstitutionalATSAttributes();
-                _context.InstitutionalATSAttributes.Add(currentAttribute);
+                currentAttribute = new InstitutionalAtsAttributes();
+                _context.InstitutionalAtsAttributes.Add(currentAttribute);
             }
             else
             {
-                currentAttribute = _context.InstitutionalATSAttributes.FirstOrDefault(x => x.Id == institutionalATSAttributesRow.Id);
+                currentAttribute = _context.InstitutionalAtsAttributes.FirstOrDefault(x => x.Id == institutionalATSAttributesRow.Id);
             }
 
             _context.SaveChanges();
@@ -72,14 +72,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment Remove(LatticeData<InstitutionalATSAttributes, InstitutionalATSAttributesRow> latticeData)
+        public TableAdjustment Remove(LatticeData<InstitutionalAtsAttributes, InstitutionalATSAttributesRow> latticeData)
         {
             var confirmationData = latticeData.CommandConfirmation<RemovalConfirmationViewModel>();
 
             var subj = latticeData.CommandSubject();
-            var institutionalATSAttributes = _context.InstitutionalATSAttributes.FirstOrDefault(x => x.Id == subj.Id);
+            var institutionalATSAttributes = _context.InstitutionalAtsAttributes.FirstOrDefault(x => x.Id == subj.Id);
 
-            _context.InstitutionalATSAttributes.Remove(institutionalATSAttributes);
+            _context.InstitutionalAtsAttributes.Remove(institutionalATSAttributes);
             _context.SaveChanges();
 
             return latticeData.Adjust(x => x
@@ -88,14 +88,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment RemoveSelected(LatticeData<InstitutionalATSAttributes, InstitutionalATSAttributesRow> latticeData)
+        public TableAdjustment RemoveSelected(LatticeData<InstitutionalAtsAttributes, InstitutionalATSAttributesRow> latticeData)
         {
             var selectedRows = latticeData.Selection().ToArray();
             var selectedAttributesIds = selectedRows.Select(x => x.Id);
 
             var ids = string.Join(",", selectedAttributesIds);
 
-            _context.Database.ExecuteSqlCommand($"DELETE FROM InstitutionalATSAttributes WHERE Id IN ({ids})");
+            _context.Database.ExecuteSqlCommand($"DELETE FROM InstitutionalAtsAttributes WHERE Id IN ({ids})");
 
             return latticeData.Adjust(x => x
                 .Remove(selectedRows)

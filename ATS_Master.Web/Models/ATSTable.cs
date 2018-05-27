@@ -8,36 +8,36 @@ using Reinforced.Lattice.Configuration;
 
 namespace ATS_Master.Web.Models
 {
-    public class ATSRow
+    public class AtsRow
     {
         public int Id { get; set; }
 
-        public ATSType ATSType { get; set; }
+        public AtsType AtsType { get; set; }
 
-        public int CityATSAttributesId { get; set; }
+        public int CityAtsAttributesId { get; set; }
 
-        public int DepartmentalATSAttributesId { get; set; }
+        public int DepartmentalAtsAttributesId { get; set; }
 
-        public int InstitutionalATSAttributesId { get; set; }
+        public int InstitutionalAtsAttributesId { get; set; }
 
     }
 
-    public class ATSIndexViewModel
+    public class AtsIndexViewModel
     {
-        public Configurator<ATS, ATSRow> Table { get; set; }
+        public Configurator<Ats, AtsRow> Table { get; set; }
 
-        public SelectListItem[] AllATSTypes { get; set; }
+        public SelectListItem[] AllAtsTypes { get; set; }
 
-        public SelectListItem[] AllCityATSAttributes { get; set; }
+        public SelectListItem[] AllCityAtsAttributes { get; set; }
 
-        public SelectListItem[] AllDepartmentalATSAttributes { get; set; }
+        public SelectListItem[] AllDepartmentalAtsAttributes { get; set; }
 
-        public SelectListItem[] AllInstitutionalATSAttributes { get; set; }
+        public SelectListItem[] AllInstitutionalAtsAttributes { get; set; }
     }
 
-    public static class ATSTable
+    public static class AtsTable
     {
-        public static Configurator<ATS, ATSRow> Configure(this Configurator<ATS, ATSRow> configurator)
+        public static Configurator<Ats, AtsRow> Configure(this Configurator<Ats, AtsRow> configurator)
         {
             configurator.DefaultTable();
 

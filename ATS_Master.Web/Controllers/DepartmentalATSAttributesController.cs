@@ -15,14 +15,14 @@ namespace ATS_Master.Web.Controllers
 {
     public class DepartmentalATSAttributesController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public DepartmentalATSAttributesController(ATSContext context)
+        public DepartmentalATSAttributesController(AtsContext context)
         {
             _context = context;
         }
 
-        // GET: DepartmentalATSAttributes
+        // GET: DepartmentalAtsAttributes
         public ActionResult Index()
         {
             return View(GenerateViewModel());
@@ -30,14 +30,14 @@ namespace ATS_Master.Web.Controllers
 
         public DepartmentalATSAttributesIndexViewModel GenerateViewModel() => new DepartmentalATSAttributesIndexViewModel()
         {
-            Table = new Configurator<DepartmentalATSAttributes, DepartmentalATSAttributesRow>()
+            Table = new Configurator<DepartmentalAtsAttributes, DepartmentalATSAttributesRow>()
                     .Configure()
                     .Url(Url.Action(actionName: "HandleTable"))
         };
 
         public ActionResult HandleTable()
         {
-            var conf = new Configurator<DepartmentalATSAttributes, DepartmentalATSAttributesRow>()
+            var conf = new Configurator<DepartmentalAtsAttributes, DepartmentalATSAttributesRow>()
                 .Configure();
 
             var handler = conf.CreateMvcHandler(ControllerContext);
@@ -46,20 +46,20 @@ namespace ATS_Master.Web.Controllers
             handler.AddCommandHandler("Remove", Remove);
             handler.AddCommandHandler("RemoveSelected", RemoveSelected);
 
-            return handler.Handle(_context.DepartmentalATSAttributes);
+            return handler.Handle(_context.DepartmentalAtsAttributes);
         }
 
-        public TableAdjustment EditDepartmentalATSAttributes(LatticeData<DepartmentalATSAttributes, DepartmentalATSAttributesRow> latticeData, DepartmentalATSAttributesRow departmentalATSAttributesRow)
+        public TableAdjustment EditDepartmentalATSAttributes(LatticeData<DepartmentalAtsAttributes, DepartmentalATSAttributesRow> latticeData, DepartmentalATSAttributesRow departmentalATSAttributesRow)
         {
-            DepartmentalATSAttributes currentAttribute = null;
+            DepartmentalAtsAttributes currentAttribute = null;
             if (departmentalATSAttributesRow.Id == 0)
             {
-                currentAttribute = new DepartmentalATSAttributes();
-                _context.DepartmentalATSAttributes.Add(currentAttribute);
+                currentAttribute = new DepartmentalAtsAttributes();
+                _context.DepartmentalAtsAttributes.Add(currentAttribute);
             }
             else
             {
-                currentAttribute = _context.DepartmentalATSAttributes.FirstOrDefault(x => x.Id == departmentalATSAttributesRow.Id);
+                currentAttribute = _context.DepartmentalAtsAttributes.FirstOrDefault(x => x.Id == departmentalATSAttributesRow.Id);
             }
 
             _context.SaveChanges();
@@ -72,14 +72,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment Remove(LatticeData<DepartmentalATSAttributes, DepartmentalATSAttributesRow> latticeData)
+        public TableAdjustment Remove(LatticeData<DepartmentalAtsAttributes, DepartmentalATSAttributesRow> latticeData)
         {
             var confirmationData = latticeData.CommandConfirmation<RemovalConfirmationViewModel>();
 
             var subj = latticeData.CommandSubject();
-            var departmentalATSAttributes = _context.DepartmentalATSAttributes.FirstOrDefault(x => x.Id == subj.Id);
+            var departmentalATSAttributes = _context.DepartmentalAtsAttributes.FirstOrDefault(x => x.Id == subj.Id);
 
-            _context.DepartmentalATSAttributes.Remove(departmentalATSAttributes);
+            _context.DepartmentalAtsAttributes.Remove(departmentalATSAttributes);
             _context.SaveChanges();
 
             return latticeData.Adjust(x => x
@@ -88,14 +88,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment RemoveSelected(LatticeData<DepartmentalATSAttributes, DepartmentalATSAttributesRow> latticeData)
+        public TableAdjustment RemoveSelected(LatticeData<DepartmentalAtsAttributes, DepartmentalATSAttributesRow> latticeData)
         {
             var selectedRows = latticeData.Selection().ToArray();
             var selectedAttributesIds = selectedRows.Select(x => x.Id);
 
             var ids = string.Join(",", selectedAttributesIds);
 
-            _context.Database.ExecuteSqlCommand($"DELETE FROM DepartmentalATSAttributes WHERE Id IN ({ids})");
+            _context.Database.ExecuteSqlCommand($"DELETE FROM DepartmentalAtsAttributes WHERE Id IN ({ids})");
 
             return latticeData.Adjust(x => x
                 .Remove(selectedRows)

@@ -17,9 +17,9 @@ namespace ATS_Master.Web.Controllers
 {
     public class PhoneNumbersController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public PhoneNumbersController(ATSContext context)
+        public PhoneNumbersController(AtsContext context)
         {
             _context = context;
         }
@@ -39,6 +39,12 @@ namespace ATS_Master.Web.Controllers
             {
                 Text = address.Street,
                 Value = address.Id.ToString()
+            }).ToArray(),
+
+            AllAts = _context.AtsStations.Select(ats => new SelectListItem()
+            {
+                Text = ats.AtsType.ToString() + " ATS " + ats.Id.ToString(),
+                Value = ats.Id.ToString()
             }).ToArray(),
 
             AllPhoneTypes = EnumHelper.GetSelectList(typeof(PhoneType)).ToArray()
@@ -72,6 +78,7 @@ namespace ATS_Master.Web.Controllers
             }
 
             currentPhoneNumber.AddressId = phoneNumberRow.AddressId;
+            currentPhoneNumber.AtsId = phoneNumberRow.AtsId;
             currentPhoneNumber.Number = phoneNumberRow.Number;
             currentPhoneNumber.PhoneType = phoneNumberRow.PhoneType;
             currentPhoneNumber.IsFree = phoneNumberRow.IsFree;
@@ -80,7 +87,13 @@ namespace ATS_Master.Web.Controllers
             phoneNumberRow.Id = currentPhoneNumber.Id;
 
             phoneNumberRow.PhoneNumberAddressShort = _context.Addresses
-                .Where(address => address.Id == phoneNumberRow.AddressId).Select(address => address.Street)
+                .Where(address => address.Id == phoneNumberRow.AddressId)
+                .Select(address => address.Street)
+                .FirstOrDefault();
+
+            phoneNumberRow.AtsNameAndId = _context.AtsStations
+                .Where(ats => ats.Id == phoneNumberRow.AtsId)
+                .Select(ats => ats.AtsType.ToString() + " ATS " + ats.Id.ToString())
                 .FirstOrDefault();
 
             return latticeData.Adjust(wrapper => wrapper

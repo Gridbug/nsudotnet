@@ -2,33 +2,38 @@
 
 namespace ATS_Master.Data.Entities
 {
-    public class ATS
+    public class Ats
     {
-        public ATS()
+        public Ats()
         {
             PhoneNumbers = new HashSet<PhoneNumber>();
         }
 
+        public string GenerateAtsName()
+        {
+            return AtsType.ToString() + " ATS " + Id.ToString();
+        }
+
         public int Id { get; set; }
 
-        public ATSType ATSType { get; set; }
+        public AtsType AtsType { get; set; }
 
-        public virtual CityATSAttributes CityAtsAttributes { get; set; }
+        public virtual CityAtsAttributes CityAtsAttributes { get; set; }
 
-        public int CityATSAttributesId { get; set; }
+        public int CityAtsAttributesId { get; set; }
 
-        public virtual DepartmentalATSAttributes DepartmentalAtsAttributes { get; set; }
+        public virtual DepartmentalAtsAttributes DepartmentalAtsAttributes { get; set; }
 
-        public int DepartmentalATSAttributesId { get; set; }
+        public int DepartmentalAtsAttributesId { get; set; }
 
-        public virtual InstitutionalATSAttributes InstitutionalAtsAttributes { get; set; }
+        public virtual InstitutionalAtsAttributes InstitutionalAtsAttributes { get; set; }
 
-        public int InstitutionalATSAttributesId { get; set; }
+        public int InstitutionalAtsAttributesId { get; set; }
 
         public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
     }
 
-    public enum ATSType
+    public enum AtsType
     {
         City,
         Departmental,

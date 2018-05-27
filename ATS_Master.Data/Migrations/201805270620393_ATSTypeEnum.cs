@@ -7,40 +7,40 @@ namespace ATS_Master.Data.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.ATS", "ATSTypeTmp", c => c.Int(nullable: false));
+            AddColumn("dbo.Ats", "ATSTypeTmp", c => c.Int(nullable: false));
             Sql(@"
-                UPDATE dbo.ATS
+                UPDATE dbo.Ats
                 SET ATSTypeTmp =
-                    CASE ATSType
+                    CASE AtsType
                         WHEN 'City' THEN 0
                         WHEN 'Departmental' THEN 1
                         WHEN 'Institutional' THEN 2
                         ELSE 3
                     END
                 ");
-            DropColumn("dbo.ATS", "ATSType");
-            RenameColumn("dbo.ATS", "ATSTypeTmp", "ATSType");
+            DropColumn("dbo.Ats", "AtsType");
+            RenameColumn("dbo.Ats", "ATSTypeTmp", "AtsType");
 
-//            AlterColumn("dbo.ATS", "ATSType", c => c.Int(nullable: false));
+//            AlterColumn("dbo.Ats", "AtsType", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            AddColumn("dbo.ATS", "ATSTypeTmp", c => c.String());
+            AddColumn("dbo.Ats", "ATSTypeTmp", c => c.String());
             Sql(@"
-                UPDATE dbo.ATS
+                UPDATE dbo.Ats
                 SET ATSTypeTmp =
-                    CASE ATSType
+                    CASE AtsType
                         WHEN 0 THEN 'City'
                         WHEN 1 THEN 'Departmental'
                         WHEN 2 THEN 'Institutional'
                         ELSE 'Undefined'
                     END
                 ");
-            DropColumn("dbo.ATS", "ATSType");
-            RenameColumn("dbo.ATS", "ATSTypeTmp", "ATSType");
+            DropColumn("dbo.Ats", "AtsType");
+            RenameColumn("dbo.Ats", "ATSTypeTmp", "AtsType");
 
-//            AlterColumn("dbo.ATS", "ATSType", c => c.String());
+//            AlterColumn("dbo.Ats", "AtsType", c => c.String());
         }
     }
 }

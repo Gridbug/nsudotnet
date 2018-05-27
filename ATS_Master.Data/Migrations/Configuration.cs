@@ -5,15 +5,15 @@ namespace ATS_Master.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ATS_Master.Data.ATSContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ATS_Master.Data.AtsContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "ATS_Master.Data.ATSContext";
+            ContextKey = "ATS_Master.Data.AtsContext";
         }
 
-        protected override void Seed(ATS_Master.Data.ATSContext context)
+        protected override void Seed(ATS_Master.Data.AtsContext context)
         {
             //  This method will be called after migrating to the latest version.
 

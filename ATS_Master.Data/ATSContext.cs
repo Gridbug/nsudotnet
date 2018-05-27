@@ -3,21 +3,21 @@ using ATS_Master.Data.Entities;
 
 namespace ATS_Master.Data
 {
-    public class ATSContext : DbContext
+    public class AtsContext : DbContext
     {
-        public ATSContext() : base(@"Data Source=DESKTOP-QJ987JK;Initial Catalog=ATS_Master;Integrated Security=True")
+        public AtsContext() : base(@"Data Source=DESKTOP-QJ987JK;Initial Catalog=ATS_Master;Integrated Security=True")
         {
         }
 
         public DbSet<Address> Addresses { get; set; }
 
-        public DbSet<ATS> ATSStations { get; set; }
+        public DbSet<Ats> AtsStations { get; set; }
 
-        public DbSet<CityATSAttributes> CityATSAttributes { get; set; }
+        public DbSet<CityAtsAttributes> CityAtsAttributes { get; set; }
 
-        public DbSet<DepartmentalATSAttributes> DepartmentalATSAttributes { get; set; }
+        public DbSet<DepartmentalAtsAttributes> DepartmentalAtsAttributes { get; set; }
 
-        public DbSet<InstitutionalATSAttributes> InstitutionalATSAttributes { get; set; }
+        public DbSet<InstitutionalAtsAttributes> InstitutionalAtsAttributes { get; set; }
 
         public DbSet<Person> Persons { get; set; }
 

@@ -10,12 +10,12 @@ namespace ATS_Master.Web.Models
 
     public class CityATSAttributesIndexViewModel
     {
-        public Configurator<CityATSAttributes, CityATSAttributesRow> Table { get; set; }
+        public Configurator<CityAtsAttributes, CityATSAttributesRow> Table { get; set; }
     }
 
     public static class CityATSAttributesTable
     {
-        public static Configurator<CityATSAttributes, CityATSAttributesRow> Configure(this Configurator<CityATSAttributes, CityATSAttributesRow> configurator)
+        public static Configurator<CityAtsAttributes, CityATSAttributesRow> Configure(this Configurator<CityAtsAttributes, CityATSAttributesRow> configurator)
         {
             configurator.DefaultTable();
 

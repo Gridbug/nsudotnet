@@ -11,7 +11,7 @@ namespace ATS_Master.Data
     {
         static void Main(string[] args)
         {
-            using (var atsContext = new ATSContext())
+            using (var atsContext = new AtsContext())
             {
 //                Person p = new Person()
 //                {

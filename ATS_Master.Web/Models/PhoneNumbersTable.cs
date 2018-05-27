@@ -18,6 +18,10 @@ namespace ATS_Master.Web.Models
         public int AddressId { get; set; }
 
         public bool IsFree { get; set; }
+
+        public string AtsNameAndId { get; set; }
+
+        public int AtsId { get; set; }
     }
 
     public class PhoneNumbersIndexViewModel
@@ -25,6 +29,8 @@ namespace ATS_Master.Web.Models
         public Configurator<PhoneNumber, PhoneNumberRow> Table { get; set; }
 
         public SelectListItem[] AllAddresses { get; set; }
+
+        public SelectListItem[] AllAts { get; set; }
 
         public SelectListItem[] AllPhoneTypes { get; set; }
     }
@@ -50,7 +56,9 @@ namespace ATS_Master.Web.Models
                 PhoneType = number.PhoneType,
                 IsFree = number.IsFree,
                 AddressId = number.AddressId,
-                PhoneNumberAddressShort = number.Address.Street
+                PhoneNumberAddressShort = number.Address.Street,
+                AtsId = number.AtsId,
+                AtsNameAndId = number.Ats.AtsType.ToString() + " ATS " + number.Ats.Id.ToString()
             }));
 
             return configurator;

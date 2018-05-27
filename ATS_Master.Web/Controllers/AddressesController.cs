@@ -18,9 +18,9 @@ namespace ATS_Master.Web.Controllers
 {
     public class AddressesController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public AddressesController(ATSContext context)
+        public AddressesController(AtsContext context)
         {
             _context = context;
         }

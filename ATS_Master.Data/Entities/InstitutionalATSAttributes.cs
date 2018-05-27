@@ -1,6 +1,6 @@
 ﻿namespace ATS_Master.Data.Entities
 {
-    public class InstitutionalATSAttributes
+    public class InstitutionalAtsAttributes
     {
         public int Id { get; set; }
     }

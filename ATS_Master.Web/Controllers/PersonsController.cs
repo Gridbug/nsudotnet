@@ -19,9 +19,9 @@ namespace ATS_Master.Web.Controllers
 {
     public class PersonsController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public PersonsController(ATSContext context)
+        public PersonsController(AtsContext context)
         {
             _context = context;
         }

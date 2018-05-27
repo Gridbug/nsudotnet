@@ -11,10 +11,10 @@
 @using Reinforced.Lattice.Plugins.Toolbar
 @using Reinforced.Lattice.Templates
 @using Reinforced.Lattice.Templates.BuiltIn
-@model ATS_Master.Web.Models.ATSIndexViewModel
+@model ATS_Master.Web.Models.AtsIndexViewModel
 
 @{
-    ViewBag.Title = "ATS";
+    ViewBag.Title = "Ats";
 
     var tableConf = Model.Table;
 
@@ -26,7 +26,7 @@
 
     tableConf.Checkboxify();
 
-    tableConf.Column(row => row.ATSType)
+    tableConf.Column(row => row.AtsType)
         .FormatEnum(item => item.Value, item => item.Text);
 
     tableConf.AddUiColumn<string>("Actions")
@@ -43,11 +43,11 @@
 
     tableConf.EditingForm(configuration =>
     {
-      configuration.EditSelectList(row => row.ATSType).Items(Model.AllATSTypes);
+      configuration.EditSelectList(row => row.AtsType).Items(Model.AllAtsTypes);
 
-      configuration.EditSelectList(row => row.CityATSAttributesId).Items(Model.AllCityATSAttributes);
-      configuration.EditSelectList(row => row.DepartmentalATSAttributesId).Items(Model.AllDepartmentalATSAttributes);
-      configuration.EditSelectList(row => row.InstitutionalATSAttributesId).Items(Model.AllInstitutionalATSAttributes);
+      configuration.EditSelectList(row => row.CityAtsAttributesId).Items(Model.AllCityAtsAttributes);
+      configuration.EditSelectList(row => row.DepartmentalAtsAttributesId).Items(Model.AllDepartmentalAtsAttributes);
+      configuration.EditSelectList(row => row.InstitutionalAtsAttributesId).Items(Model.AllInstitutionalAtsAttributes);
 
       configuration.RenderTo("#ltcModalHolder");
     }, subscription => subscription.Event("click").Selector("._beginEdit"));

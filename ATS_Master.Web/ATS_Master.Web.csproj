@@ -280,7 +280,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddressesTable.cs" />
-    <Compile Include="Models\ATSTable.cs" />
+    <Compile Include="Models\AtsTable.cs" />
     <Compile Include="Models\DefaultTableConfigurator.cs" />
     <Compile Include="Models\DepartmentalATSAttributesTable.cs" />
     <Compile Include="Models\CityATSAttributesTable.cs" />

@@ -10,12 +10,12 @@ namespace ATS_Master.Web.Models
 
     public class DepartmentalATSAttributesIndexViewModel
     {
-        public Configurator<DepartmentalATSAttributes, DepartmentalATSAttributesRow> Table { get; set; }
+        public Configurator<DepartmentalAtsAttributes, DepartmentalATSAttributesRow> Table { get; set; }
     }
 
     public static class DepartmentalATSAttributesTable
     {
-        public static Configurator<DepartmentalATSAttributes, DepartmentalATSAttributesRow> Configure(this Configurator<DepartmentalATSAttributes, DepartmentalATSAttributesRow> configurator)
+        public static Configurator<DepartmentalAtsAttributes, DepartmentalATSAttributesRow> Configure(this Configurator<DepartmentalAtsAttributes, DepartmentalATSAttributesRow> configurator)
         {
             configurator.DefaultTable();
 

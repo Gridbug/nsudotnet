@@ -20,9 +20,9 @@ namespace ATS_Master.Web.Controllers
     public class PhoneHistoryController : Controller
     {
 
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public PhoneHistoryController(ATSContext context)
+        public PhoneHistoryController(AtsContext context)
         {
             _context = context;
         }

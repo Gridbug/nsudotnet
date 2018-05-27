@@ -10,12 +10,12 @@ namespace ATS_Master.Web.Models
 
     public class InstitutionalATSAttributesIndexViewModel
     {
-        public Configurator<InstitutionalATSAttributes, InstitutionalATSAttributesRow> Table { get; set; }
+        public Configurator<InstitutionalAtsAttributes, InstitutionalATSAttributesRow> Table { get; set; }
     }
 
     public static class InstitutionalATSAttributesTable
     {
-        public static Configurator<InstitutionalATSAttributes, InstitutionalATSAttributesRow> Configure(this Configurator<InstitutionalATSAttributes, InstitutionalATSAttributesRow> configurator)
+        public static Configurator<InstitutionalAtsAttributes, InstitutionalATSAttributesRow> Configure(this Configurator<InstitutionalAtsAttributes, InstitutionalATSAttributesRow> configurator)
         {
             configurator.DefaultTable();
 

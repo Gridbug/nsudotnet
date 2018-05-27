@@ -5,9 +5,9 @@ namespace ATS_Master.Web.Controllers
 {
     public class ATSUsersController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public ATSUsersController(ATSContext context)
+        public ATSUsersController(AtsContext context)
         {
             _context = context;
         }

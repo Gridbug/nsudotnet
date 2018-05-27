@@ -19,9 +19,9 @@ namespace ATS_Master.Web.Controllers
 {
     public class ATSController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public ATSController(ATSContext context)
+        public ATSController(AtsContext context)
         {
             _context = context;
         }
@@ -31,27 +31,27 @@ namespace ATS_Master.Web.Controllers
             return View(GenerateViewModel());
         }
 
-        public ATSIndexViewModel GenerateViewModel() => new ATSIndexViewModel()
+        public AtsIndexViewModel GenerateViewModel() => new AtsIndexViewModel()
         {
-            Table = new Configurator<ATS, ATSRow>()
+            Table = new Configurator<Ats, AtsRow>()
                 .Configure()
                 .Url(Url.Action("HandleTable")),
 
-            AllATSTypes = EnumHelper.GetSelectList(typeof(ATSType)).ToArray(),
+            AllAtsTypes = EnumHelper.GetSelectList(typeof(AtsType)).ToArray(),
 
-            AllCityATSAttributes = _context.CityATSAttributes.Select(attributes => new SelectListItem()
+            AllCityAtsAttributes = _context.CityAtsAttributes.Select(attributes => new SelectListItem()
             {
                 Text = attributes.Id.ToString(),
                 Value = attributes.Id.ToString()
             }).ToArray(),
 
-            AllDepartmentalATSAttributes = _context.DepartmentalATSAttributes.Select(attributes => new SelectListItem()
+            AllDepartmentalAtsAttributes = _context.DepartmentalAtsAttributes.Select(attributes => new SelectListItem()
             {
             Text = attributes.Id.ToString(),
             Value = attributes.Id.ToString()
             }).ToArray(),
 
-            AllInstitutionalATSAttributes = _context.InstitutionalATSAttributes.Select(attributes => new SelectListItem()
+            AllInstitutionalAtsAttributes = _context.InstitutionalAtsAttributes.Select(attributes => new SelectListItem()
             {
                 Text = attributes.Id.ToString(),
                 Value = attributes.Id.ToString()
@@ -60,34 +60,36 @@ namespace ATS_Master.Web.Controllers
 
         public ActionResult HandleTable()
         {
-            var configurator = new Configurator<ATS, ATSRow>()
+            var configurator = new Configurator<Ats, AtsRow>()
                 .Configure();
 
             var handler = configurator.CreateMvcHandler(ControllerContext);
 
-            handler.AddEditHandler(EditATS);
+            handler.AddEditHandler(EditAts);
             handler.AddCommandHandler("Remove", Remove);
             handler.AddCommandHandler("RemoveSelected", RemoveSelected);
 
-            return handler.Handle(_context.ATSStations);
+            return handler.Handle(_context.AtsStations);
         }
 
-        public TableAdjustment EditATS(LatticeData<ATS, ATSRow> latticeData, ATSRow atsRow)
+        public TableAdjustment EditAts(LatticeData<Ats, AtsRow> latticeData, AtsRow atsRow)
         {
-            ATS currentATS = null;
+            Ats currentATS = null;
             if (atsRow.Id == 0)
             {
-                currentATS = new ATS();
-                _context.ATSStations.Add(currentATS);
+                currentATS = new Ats();
+                _context.AtsStations.Add(currentATS);
             }
             else
             {
-                currentATS = _context.ATSStations.FirstOrDefault(number => number.Id == atsRow.Id);
+                currentATS = _context.AtsStations.FirstOrDefault(ats => ats.Id == atsRow.Id);
             }
 
-            currentATS.CityATSAttributesId = atsRow.CityATSAttributesId;
-            currentATS.DepartmentalATSAttributesId = atsRow.DepartmentalATSAttributesId;
-            currentATS.InstitutionalATSAttributesId = atsRow.InstitutionalATSAttributesId;
+            currentATS.CityAtsAttributesId = atsRow.CityAtsAttributesId;
+            currentATS.DepartmentalAtsAttributesId = atsRow.DepartmentalAtsAttributesId;
+            currentATS.InstitutionalAtsAttributesId = atsRow.InstitutionalAtsAttributesId;
+            currentATS.AtsType = atsRow.AtsType;
+
             _context.SaveChanges();
 
             atsRow.Id = currentATS.Id;
@@ -98,14 +100,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment Remove(LatticeData<ATS, ATSRow> latticeData)
+        public TableAdjustment Remove(LatticeData<Ats, AtsRow> latticeData)
         {
             var confirmationData = latticeData.CommandConfirmation<RemovalConfirmationViewModel>();
 
             var subject = latticeData.CommandSubject();
-            var ats = _context.ATSStations.FirstOrDefault(ats1 => ats1.Id == subject.Id);
+            var ats = _context.AtsStations.FirstOrDefault(ats1 => ats1.Id == subject.Id);
 
-            _context.ATSStations.Remove(ats);
+            _context.AtsStations.Remove(ats);
             _context.SaveChanges();
 
             return latticeData.Adjust(wrapper => wrapper
@@ -114,14 +116,14 @@ namespace ATS_Master.Web.Controllers
             );
         }
 
-        public TableAdjustment RemoveSelected(LatticeData<ATS, ATSRow> latticeData)
+        public TableAdjustment RemoveSelected(LatticeData<Ats, AtsRow> latticeData)
         {
             var selectedRows = latticeData.Selection().ToArray();
-            var selectedATSIds = selectedRows.Select(row => row.Id);
+            var selectedAtsIds = selectedRows.Select(row => row.Id);
 
-            var ids = string.Join(",", selectedATSIds);
+            var ids = string.Join(",", selectedAtsIds);
 
-            _context.Database.ExecuteSqlCommand($"DELETE FROM ATS WHERE Id IN ({ids})");
+            _context.Database.ExecuteSqlCommand($"DELETE FROM Ats WHERE Id IN ({ids})");
 
             return latticeData.Adjust(wrapper => wrapper
                 .Remove(selectedRows)

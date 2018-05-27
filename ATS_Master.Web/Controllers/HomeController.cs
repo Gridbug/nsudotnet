@@ -9,9 +9,9 @@ namespace ATS_Master.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ATSContext _context;
+        private readonly AtsContext _context;
 
-        public HomeController(ATSContext context)
+        public HomeController(AtsContext context)
         {
             _context = context;
         }

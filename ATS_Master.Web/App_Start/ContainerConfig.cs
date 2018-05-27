@@ -14,7 +14,7 @@ namespace ATS_Master.Web.App_Start
         {
             cb.RegisterControllers(typeof(ContainerConfig).Assembly);
 
-            cb.RegisterType<ATSContext>()
+            cb.RegisterType<AtsContext>()
                 .AsSelf()
                 .InstancePerRequest();
         }

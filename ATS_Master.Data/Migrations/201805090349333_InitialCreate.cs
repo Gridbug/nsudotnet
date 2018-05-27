@@ -21,7 +21,7 @@ namespace ATS_Master.Data.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.ATS",
+                "dbo.Ats",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -31,15 +31,15 @@ namespace ATS_Master.Data.Migrations
                         InstitutionalAtsAttributes_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.CityATSAttributes", t => t.CityAtsAttributes_Id)
-                .ForeignKey("dbo.DepartmentalATSAttributes", t => t.DepartmentalAtsAttributes_Id)
-                .ForeignKey("dbo.InstitutionalATSAttributes", t => t.InstitutionalAtsAttributes_Id)
+                .ForeignKey("dbo.CityAtsAttributes", t => t.CityAtsAttributes_Id)
+                .ForeignKey("dbo.DepartmentalAtsAttributes", t => t.DepartmentalAtsAttributes_Id)
+                .ForeignKey("dbo.InstitutionalAtsAttributes", t => t.InstitutionalAtsAttributes_Id)
                 .Index(t => t.CityAtsAttributes_Id)
                 .Index(t => t.DepartmentalAtsAttributes_Id)
                 .Index(t => t.InstitutionalAtsAttributes_Id);
             
             CreateTable(
-                "dbo.CityATSAttributes",
+                "dbo.CityAtsAttributes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -47,7 +47,7 @@ namespace ATS_Master.Data.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.DepartmentalATSAttributes",
+                "dbo.DepartmentalAtsAttributes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -55,7 +55,7 @@ namespace ATS_Master.Data.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.InstitutionalATSAttributes",
+                "dbo.InstitutionalAtsAttributes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -75,7 +75,7 @@ namespace ATS_Master.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Addresses", t => t.Address_Id)
-                .ForeignKey("dbo.ATS", t => t.ATS_Id)
+                .ForeignKey("dbo.Ats", t => t.ATS_Id)
                 .Index(t => t.Address_Id)
                 .Index(t => t.ATS_Id);
             
@@ -136,7 +136,7 @@ namespace ATS_Master.Data.Migrations
                         PhoneNumber_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ATS", t => t.Ats_Id)
+                .ForeignKey("dbo.Ats", t => t.Ats_Id)
                 .ForeignKey("dbo.People", t => t.Person_Id)
                 .ForeignKey("dbo.PhoneNumbers", t => t.PhoneNumber_Id)
                 .Index(t => t.Ats_Id)
@@ -175,13 +175,13 @@ namespace ATS_Master.Data.Migrations
             DropForeignKey("dbo.PhoneInstallationPreferentialQueues", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Users", "PhoneNumber_Id", "dbo.PhoneNumbers");
             DropForeignKey("dbo.Users", "Person_Id", "dbo.People");
-            DropForeignKey("dbo.Users", "Ats_Id", "dbo.ATS");
+            DropForeignKey("dbo.Users", "Ats_Id", "dbo.Ats");
             DropForeignKey("dbo.PhoneHistories", "PhoneNumber_Id", "dbo.PhoneNumbers");
-            DropForeignKey("dbo.PhoneNumbers", "ATS_Id", "dbo.ATS");
+            DropForeignKey("dbo.PhoneNumbers", "ATS_Id", "dbo.Ats");
             DropForeignKey("dbo.PhoneNumbers", "Address_Id", "dbo.Addresses");
-            DropForeignKey("dbo.ATS", "InstitutionalAtsAttributes_Id", "dbo.InstitutionalATSAttributes");
-            DropForeignKey("dbo.ATS", "DepartmentalAtsAttributes_Id", "dbo.DepartmentalATSAttributes");
-            DropForeignKey("dbo.ATS", "CityAtsAttributes_Id", "dbo.CityATSAttributes");
+            DropForeignKey("dbo.Ats", "InstitutionalAtsAttributes_Id", "dbo.InstitutionalAtsAttributes");
+            DropForeignKey("dbo.Ats", "DepartmentalAtsAttributes_Id", "dbo.DepartmentalAtsAttributes");
+            DropForeignKey("dbo.Ats", "CityAtsAttributes_Id", "dbo.CityAtsAttributes");
             DropIndex("dbo.UserAccountings", new[] { "User_Id" });
             DropIndex("dbo.PhoneInstallationQueues", new[] { "User_Id" });
             DropIndex("dbo.PhoneInstallationPreferentialQueues", new[] { "User_Id" });
@@ -191,9 +191,9 @@ namespace ATS_Master.Data.Migrations
             DropIndex("dbo.PhoneHistories", new[] { "PhoneNumber_Id" });
             DropIndex("dbo.PhoneNumbers", new[] { "ATS_Id" });
             DropIndex("dbo.PhoneNumbers", new[] { "Address_Id" });
-            DropIndex("dbo.ATS", new[] { "InstitutionalAtsAttributes_Id" });
-            DropIndex("dbo.ATS", new[] { "DepartmentalAtsAttributes_Id" });
-            DropIndex("dbo.ATS", new[] { "CityAtsAttributes_Id" });
+            DropIndex("dbo.Ats", new[] { "InstitutionalAtsAttributes_Id" });
+            DropIndex("dbo.Ats", new[] { "DepartmentalAtsAttributes_Id" });
+            DropIndex("dbo.Ats", new[] { "CityAtsAttributes_Id" });
             DropTable("dbo.UserAccountings");
             DropTable("dbo.PhoneInstallationQueues");
             DropTable("dbo.Users");
@@ -201,10 +201,10 @@ namespace ATS_Master.Data.Migrations
             DropTable("dbo.PhoneHistories");
             DropTable("dbo.People");
             DropTable("dbo.PhoneNumbers");
-            DropTable("dbo.InstitutionalATSAttributes");
-            DropTable("dbo.DepartmentalATSAttributes");
-            DropTable("dbo.CityATSAttributes");
-            DropTable("dbo.ATS");
+            DropTable("dbo.InstitutionalAtsAttributes");
+            DropTable("dbo.DepartmentalAtsAttributes");
+            DropTable("dbo.CityAtsAttributes");
+            DropTable("dbo.Ats");
             DropTable("dbo.Addresses");
         }
     }
