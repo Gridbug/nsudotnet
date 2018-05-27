@@ -13,6 +13,10 @@
         public int AddressId { get; set; }
 
         public bool IsFree { get; set; }
+
+        public virtual ATS ats { get; set; }
+
+        public int atsId { get; set; }
     }
 
     public enum PhoneType
