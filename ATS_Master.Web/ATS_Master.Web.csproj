@@ -247,6 +247,7 @@
     <Content Include="Views\InstitutionalATSAttributes\Index.cshtml" />
     <Content Include="Views\DepartmentalATSAttributes\Index.cshtml" />
     <Content Include="Views\CityATSAttributes\Index.cshtml" />
+    <Content Include="Views\ATS\Index.cshtml" />
     <None Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -265,6 +266,7 @@
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
+    <Compile Include="Controllers\ATSController.cs" />
     <Compile Include="Controllers\ATSUsersController.cs" />
     <Compile Include="Controllers\CityATSAttributesController.cs" />
     <Compile Include="Controllers\DepartmentalATSAttributesController.cs" />
@@ -278,6 +280,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AddressesTable.cs" />
+    <Compile Include="Models\ATSTable.cs" />
     <Compile Include="Models\DefaultTableConfigurator.cs" />
     <Compile Include="Models\DepartmentalATSAttributesTable.cs" />
     <Compile Include="Models\CityATSAttributesTable.cs" />

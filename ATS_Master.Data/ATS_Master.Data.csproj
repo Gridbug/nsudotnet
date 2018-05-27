@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201805220500587_PersonGenderEnum.Designer.cs">
       <DependentUpon>201805220500587_PersonGenderEnum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805270620393_ATSTypeEnum.cs" />
+    <Compile Include="Migrations\201805270620393_ATSTypeEnum.Designer.cs">
+      <DependentUpon>201805270620393_ATSTypeEnum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805220500587_PersonGenderEnum.resx">
       <DependentUpon>201805220500587_PersonGenderEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805270620393_ATSTypeEnum.resx">
+      <DependentUpon>201805270620393_ATSTypeEnum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

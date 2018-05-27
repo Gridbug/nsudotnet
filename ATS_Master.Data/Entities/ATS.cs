@@ -11,7 +11,7 @@ namespace ATS_Master.Data.Entities
 
         public int Id { get; set; }
 
-        public string ATSType { get; set; }
+        public ATSType ATSType { get; set; }
 
         public virtual CityATSAttributes CityAtsAttributes { get; set; }
 
@@ -26,5 +26,12 @@ namespace ATS_Master.Data.Entities
         public int InstitutionalATSAttributesId { get; set; }
 
         public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
+    }
+
+    public enum ATSType
+    {
+        City,
+        Departmental,
+        Institutional
     }
 }

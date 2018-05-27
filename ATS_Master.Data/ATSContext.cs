@@ -11,7 +11,7 @@ namespace ATS_Master.Data
 
         public DbSet<Address> Addresses { get; set; }
 
-        public DbSet<ATS> AtsStations { get; set; }
+        public DbSet<ATS> ATSStations { get; set; }
 
         public DbSet<CityATSAttributes> CityATSAttributes { get; set; }
 
