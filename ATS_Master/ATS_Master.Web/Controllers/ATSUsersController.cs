@@ -35,7 +35,7 @@ namespace ATS_Master.Web.Controllers
 
             AllPersons = _context.Persons.Select(person => new SelectListItem()
             {
-                Text = person.Name + person.Surname,
+                Text = person.Name + " " + person.Surname,
                 Value = person.Id.ToString()
             }).ToArray(),
 
@@ -94,7 +94,7 @@ namespace ATS_Master.Web.Controllers
 
             atsUserRow.Person = _context.Persons
                 .Where(person => person.Id == atsUserRow.PersonId)
-                .Select(person => person.Name + person.Surname)
+                .Select(person => person.Name + " " + person.Surname)
                 .FirstOrDefault();
 
             return latticeData.Adjust(wrapper => wrapper

@@ -61,7 +61,7 @@ namespace ATS_Master.Web.Models
                 Id = user.Id,
                 PhoneNumber = user.PhoneNumber.Number,
                 PhoneNumberId = user.PhoneNumberId,
-                Person = user.Person.Name + user.Person.Surname,
+                Person = user.Person.Name + " " + user.Person.Surname,
                 PersonId = user.PersonId,
                 CityBalance = user.CityBalance,
                 IntercityAccess = user.IntercityAccess,

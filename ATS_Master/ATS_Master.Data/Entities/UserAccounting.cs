@@ -6,7 +6,7 @@
 
         public virtual AtsUser AtsUser { get; set; }
 
-        public int UserId { get; set; }
+        public int AtsUserId { get; set; }
 
         public int Total { get; set; }
     }

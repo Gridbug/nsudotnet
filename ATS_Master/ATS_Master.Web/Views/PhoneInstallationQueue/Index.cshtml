@@ -1,0 +1,110 @@
+﻿@using ATS_Master.Web.Controllers
+@using Reinforced.Lattice.Commands
+@using Reinforced.Lattice.Configuration
+@using Reinforced.Lattice.Editing.Editors.PlainText
+@using Reinforced.Lattice.Editing.Editors.SelectList
+@using Reinforced.Lattice.Editing.Form
+@using Reinforced.Lattice.Mvc
+@using Reinforced.Lattice.Plugins.Checkboxify
+@using Reinforced.Lattice.Plugins.Reload
+@using Reinforced.Lattice.Plugins.Toolbar
+@using Reinforced.Lattice.Templates
+@using Reinforced.Lattice.Templates.BuiltIn
+@model ATS_Master.Web.Models.PhoneInstallationQueueIndexViewModel
+
+@{
+    ViewBag.Title = "Phone Installation Queue";
+
+    var tableConf = Model.Table;
+
+    tableConf.Toolbar("toolbar-rt", x =>
+    {
+        x.AddSimpleButton("Add new").AddNewByForm();
+        x.AddCommandButton("Remove selected", "RemoveSelected").DisableIfNothingChecked();
+    });
+
+    tableConf.Checkboxify();
+
+    tableConf.Column(x => x.UserId).DataOnly();
+    tableConf.Column(row => row.UserName).DataOnly();
+    tableConf.Column(row => row.UserSurname).DataOnly();
+
+    tableConf.Column(row => row.AtsUser)
+.Razor(@<span>{UserName} {UserSurname} (#{UserId}) </span>);
+
+    tableConf.AddUiColumn<string>("Actions")
+.Razor(@<div>
+                <button class="btn btn-xs btn-warning _beginEdit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button class="btn btn-xs btn-danger _remove">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>)
+    .SubscribeCellEvent(x => x.Command("click", "Remove").Selector("._remove"))
+    ;
+
+    tableConf.EditingForm(configuration =>
+    {
+        configuration.EditSelectList(row => row.UserId).Items(Model.AllAtsUsers);
+
+        configuration.RenderTo("#ltcModalHolder");
+    }, c => c.Event("click").Selector("._beginEdit"));
+
+    tableConf.Command("Remove", x => x.ConfigureRemoval());
+    tableConf.Command("RemoveSelected", x => x.ConfigureRemoval());
+
+    tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
+}
+
+<h2>Phone Installation Queue</h2>
+
+<div class="row">
+    <div class="col-md-12 text-center" id="tableRefreshButton"></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div id="phoneInstallationQueueTable"></div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @using (var tpl = this.LatticeAdditionalTemplates())
+    {
+        using (var window = tpl.Plugin.Confirmation("confirmDelete"))
+        {
+            <div class="modal-dialog" @tpl.Callback("ltcShowModal") @tpl.DestroyCallback("ltcHideModal")>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @window.BindDismiss("click")>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">
+                            Deletion
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to remove user from installation queue?
+                        <br />
+                        <fieldset class="form-horizontal">
+                            @window.Editors()
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" @window.BindDismiss("click")>
+                            No
+                        </button>
+                        <button type="button" class="btn btn-primary" @window.BindConfirm("click")>
+                            Yes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+    @{ Html.RenderTemplates("lt", "Lattice_Templates_Bootstrap"); }
+
+    @Model.Table.InitializationScript("phoneInstallationQueueTable", "window.$$table");
+}

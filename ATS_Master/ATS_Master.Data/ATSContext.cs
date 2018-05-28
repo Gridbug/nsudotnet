@@ -5,10 +5,6 @@ namespace ATS_Master.Data
 {
     public class AtsContext : DbContext
     {
-        public AtsContext() : base(@"Data Source=DESKTOP-QJ987JK;Initial Catalog=ATS_Master;Integrated Security=True")
-        {
-        }
-
         public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Ats> AtsStations { get; set; }
@@ -32,5 +28,14 @@ namespace ATS_Master.Data
         public DbSet<AtsUser> AtsUsers { get; set; }
 
         public DbSet<UserAccounting> UserAccountings { get; set; }
+
+        public AtsContext() : base(@"Data Source=DESKTOP-QJ987JK;Initial Catalog=ATS_Master;Integrated Security=True")
+        {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder b)
+        {
+            base.OnModelCreating(b);
+        }
     }
 }

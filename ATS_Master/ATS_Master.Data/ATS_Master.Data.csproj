@@ -98,6 +98,14 @@
     <Compile Include="Migrations\201805271656135_AtsUserChangedName.Designer.cs">
       <DependentUpon>201805271656135_AtsUserChangedName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805281234255_UserAccountingAtsUsedIdFix.cs" />
+    <Compile Include="Migrations\201805281234255_UserAccountingAtsUsedIdFix.Designer.cs">
+      <DependentUpon>201805281234255_UserAccountingAtsUsedIdFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805281602541_InstallationQueueForeignKeyFi.cs" />
+    <Compile Include="Migrations\201805281602541_InstallationQueueForeignKeyFi.Designer.cs">
+      <DependentUpon>201805281602541_InstallationQueueForeignKeyFi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +143,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805271656135_AtsUserChangedName.resx">
       <DependentUpon>201805271656135_AtsUserChangedName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805281234255_UserAccountingAtsUsedIdFix.resx">
+      <DependentUpon>201805281234255_UserAccountingAtsUsedIdFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805281602541_InstallationQueueForeignKeyFi.resx">
+      <DependentUpon>201805281602541_InstallationQueueForeignKeyFi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
