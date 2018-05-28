@@ -77,15 +77,14 @@ namespace ATS_Master.Web.Controllers
 
             userBillRow.Id = currentUserBill.Id;
 
-            userBillRow.AtsUser = _context.AtsUsers
-                .Join(_context.Persons, user => user.PersonId, person => person.Id, (user, person) => new
-                {
-                    Id = user.Id,
-                    Name = person.Name,
-                    Surname = person.Surname
-                })
+            userBillRow.UserName = _context.AtsUsers
                 .Where(user => user.Id == userBillRow.UserId)
-                .Select(user => user.Name + " " + user.Surname + " (#" + user.Id + ")")
+                .Select(user => user.Person.Name)
+                .FirstOrDefault();
+
+            userBillRow.UserSurname = _context.AtsUsers
+                .Where(user => user.Id == userBillRow.UserId)
+                .Select(user => user.Person.Surname)
                 .FirstOrDefault();
 
             return latticeData.Adjust(x => x

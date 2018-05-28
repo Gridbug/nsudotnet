@@ -36,7 +36,9 @@ namespace ATS_Master.Web.Controllers
                     .Configure()
                     .Url(Url.Action(actionName: "HandleTable")),
 
-            AllAtsUsers = _context.AtsUsers.Select(user => new SelectListItem()
+            AllAtsUsers = _context.AtsUsers
+                .Where(user => user.PreferentialUser == false)
+                .Select(user => new SelectListItem()
             {
                 Text = user.Person.Name + " " + user.Person.Surname + " (#" + user.Id + ")",
                 Value = user.Id.ToString()
@@ -75,15 +77,14 @@ namespace ATS_Master.Web.Controllers
 
             queueRow.Id = currentQueue.Id;
 
-            queueRow.AtsUser = _context.AtsUsers
-                .Join(_context.Persons, user => user.PersonId, person => person.Id, (user, person) => new
-                {
-                    Id = user.Id,
-                    Name = person.Name,
-                    Surname = person.Surname
-                })
+            queueRow.UserName = _context.AtsUsers
                 .Where(user => user.Id == queueRow.UserId)
-                .Select(user => user.Name + " " + user.Surname + " (#" + user.Id + ")")
+                .Select(user => user.Person.Name)
+                .FirstOrDefault();
+
+            queueRow.UserSurname = _context.AtsUsers
+                .Where(user => user.Id == queueRow.UserId)
+                .Select(user => user.Person.Surname)
                 .FirstOrDefault();
 
             return latticeData.Adjust(x => x

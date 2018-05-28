@@ -39,9 +39,6 @@ namespace ATS_Master.Web.Models
             configurator.OrderFallback(x => x.Id);
 
             //configurator.Column(x => x.Id).DataOnly();
-            configurator.Column(row => row.UserName).DataOnly();
-            configurator.Column(row => row.UserSurname).DataOnly();
-            configurator.Column(row => row.UserId).DataOnly();
 
             configurator.ProjectDataWith(queues => queues.Select(queue => new PhoneInstallationQueueRow()
             {
