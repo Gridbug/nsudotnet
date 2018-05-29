@@ -1,20 +1,21 @@
 ﻿@using ATS_Master.Web.Controllers
-@using Reinforced.Lattice.CellTemplating
 @using Reinforced.Lattice.Commands
 @using Reinforced.Lattice.Configuration
+@using Reinforced.Lattice.Editing.Editors.Check
 @using Reinforced.Lattice.Editing.Editors.PlainText
 @using Reinforced.Lattice.Editing.Editors.SelectList
 @using Reinforced.Lattice.Editing.Form
+@using Reinforced.Lattice.Filters
 @using Reinforced.Lattice.Mvc
 @using Reinforced.Lattice.Plugins.Checkboxify
 @using Reinforced.Lattice.Plugins.Reload
 @using Reinforced.Lattice.Plugins.Toolbar
 @using Reinforced.Lattice.Templates
 @using Reinforced.Lattice.Templates.BuiltIn
-@model ATS_Master.Web.Models.AtsIndexViewModel
+@model ATS_Master.Web.Models.AtsUsersIndexViewModel
 
 @{
-    ViewBag.Title = "Ats";
+    ViewBag.Title = "Ats Users Filtered";
 
     var tableConf = Model.Table;
 
@@ -26,11 +27,8 @@
 
     tableConf.Checkboxify();
 
-    tableConf.Column(row => row.Id)
-        .Razor(@<a href="@Url.Action("ForSpecificAts", "AtsUsers", new {atsId = "{Id}"})">{Id}</a>);
-
-    tableConf.Column(row => row.AtsType)
-        .FormatEnum(item => item.Value, item => item.Text);
+    tableConf.Column(row => row.IntercityAccess)
+        .FilterBooleanUi("Has Access", "No Access", null, false, wrapper => wrapper.ClientFiltering());
 
     tableConf.AddUiColumn<string>("Actions")
         .Razor(@<div>
@@ -46,11 +44,16 @@
 
     tableConf.EditingForm(configuration =>
     {
-        configuration.EditSelectList(row => row.AtsType).Items(Model.AllAtsTypes);
+        configuration.EditSelectList(row => row.PersonId).Items(Model.AllPersons);
+        configuration.EditSelectList(row => row.PhoneNumberId).Items(Model.AllPhoneNumbers);
 
-        configuration.EditSelectList(row => row.CityAtsAttributesId).Items(Model.AllCityAtsAttributes);
-        configuration.EditSelectList(row => row.DepartmentalAtsAttributesId).Items(Model.AllDepartmentalAtsAttributes);
-        configuration.EditSelectList(row => row.InstitutionalAtsAttributesId).Items(Model.AllInstitutionalAtsAttributes);
+        configuration.EditPlainText(row => row.UserFee);
+        configuration.EditPlainText(row => row.CityBalance);
+        configuration.EditPlainText(row => row.IntercityBalance);
+
+        configuration.EditCheck(row => row.IntercityAccess);
+        configuration.EditCheck(row => row.PreferentialUser);
+        configuration.EditCheck(row => row.PhoneInstalled);
 
         configuration.RenderTo("#ltcModalHolder");
     }, subscription => subscription.Event("click").Selector("._beginEdit"));
@@ -61,18 +64,18 @@
     tableConf.ReloadButton(ui => ui.RenderTo("#tableRefreshButton"));
 }
 
-<h2>ATS</h2>
+<h2>ATS Users Filtered</h2>
 
 <div class="row">
     <div class="col-md-12 text-center" id="tableRefreshButton"></div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div id="atsTable"></div>
+        <div id="atsUsersFilteredTable"></div>
     </div>
 </div>
 
-@section Scripts
+    @section Scripts
 {
     @using (var tpl = this.LatticeAdditionalTemplates())
     {
@@ -89,7 +92,7 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to remove ATS?
+                        Are you sure you want to remove ATS User?
                         <br />
                         <fieldset class="form-horizontal">
                             @window.Editors()
@@ -110,5 +113,6 @@
 
     @{ Html.RenderTemplates("lt", "Lattice_Templates_Bootstrap"); }
 
-    @Model.Table.InitializationScript("atsTable", "window.$$table");
+    @Model.Table.InitializationScript("atsUsersFilteredTable", "window.$$table");
 }
+

@@ -252,6 +252,8 @@
     <Content Include="Views\UserAccounting\Index.cshtml" />
     <Content Include="Views\PhoneInstallationQueue\Index.cshtml" />
     <Content Include="Views\PhoneInstallationPreferentialQueue\Index.cshtml" />
+    <Content Include="Views\AtsUsers\ForSpecificAts.cshtml" />
+    <Content Include="Views\ATS\AtsFilters.cshtml" />
     <None Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

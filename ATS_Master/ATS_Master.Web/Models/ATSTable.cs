@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using ATS_Master.Data.Entities;
 using Reinforced.Lattice.Configuration;
+using Reinforced.Lattice.Filters;
+using Reinforced.Lattice.Plugins.Formwatch;
 
 namespace ATS_Master.Web.Models
 {
@@ -35,6 +37,11 @@ namespace ATS_Master.Web.Models
         public SelectListItem[] AllInstitutionalAtsAttributes { get; set; }
     }
 
+    public class AtsFiltersViewModel
+    {
+        public int ExactId { get; set; }
+    }
+
     public static class AtsTable
     {
         public static Configurator<Ats, AtsRow> Configure(this Configurator<Ats, AtsRow> configurator)
@@ -47,6 +54,9 @@ namespace ATS_Master.Web.Models
 
 //            configurator.Column(row => row.Id).DataOnly();
 
+//            configurator.FreeFilter(query => query.Form<AtsFiltersViewModel>().ExactId.ToFilterTuple(),
+//                                    (atses, i) => i == 0 ? atses : atses.Where(ats => ats.Id == i));
+//
             return configurator;
         }
     }

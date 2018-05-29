@@ -26,6 +26,9 @@
 
     tableConf.Checkboxify();
 
+    tableConf.Column(row => row.AtsId)
+        .DataOnly();
+
     tableConf.Column(row => row.PhoneType)
         .FormatEnum(item => item.Value, item => item.Text);
 

@@ -24,29 +24,38 @@ namespace ATS_Master.Web.Controllers
 
         public ActionResult Index()
         {
-            return View(GenerateViewModel());
+            return View(GenerateViewModel(-1));
         }
 
-        public AtsUsersIndexViewModel GenerateViewModel() => new AtsUsersIndexViewModel()
+        public ActionResult ForSpecificAts(int atsId)
         {
-            Table = new Configurator<AtsUser, AtsUserRow>()
-                .Configure()
-                .Url(Url.Action("HandleTable")),
+            return View(GenerateViewModel(atsId));
+        }
 
-            AllPersons = _context.Persons.Select(person => new SelectListItem()
+        public AtsUsersIndexViewModel GenerateViewModel(int atsId)
+        {
+            var vm = new AtsUsersIndexViewModel();
+
+            vm.Table = new Configurator<AtsUser, AtsUserRow>()
+                .Configure()
+                .Url(Url.Action(nameof(HandleTable), new {atsId = atsId}));
+
+            vm.AllPersons = _context.Persons.Select(person => new SelectListItem()
             {
                 Text = person.Name + " " + person.Surname,
                 Value = person.Id.ToString()
-            }).ToArray(),
+            }).ToArray();
 
-            AllPhoneNumbers = _context.PhoneNumbers.Select(number => new SelectListItem()
+            vm.AllPhoneNumbers = _context.PhoneNumbers.Select(number => new SelectListItem()
             {
                 Text = number.Number,
                 Value = number.Id.ToString()
-            }).ToArray()
-        };
+            }).ToArray();
 
-        public ActionResult HandleTable()
+            return vm;
+        }
+
+        public ActionResult HandleTable(int atsId)
         {
             var configurator = new Configurator<AtsUser, AtsUserRow>()
                 .Configure();
@@ -57,7 +66,15 @@ namespace ATS_Master.Web.Controllers
             handler.AddCommandHandler("Remove", Remove);
             handler.AddCommandHandler("RemoveSelected", RemoveSelected);
 
-            return handler.Handle(_context.AtsUsers);
+            if (atsId < 0)
+            {
+                return handler.Handle(_context.AtsUsers);
+            }
+            else
+            {
+                return handler.Handle(_context.AtsUsers.Where(user => user.PhoneNumber.AtsId == atsId));
+            }
+            
         }
 
         public TableAdjustment EditAtsUser(LatticeData<AtsUser, AtsUserRow> latticeData, AtsUserRow atsUserRow)
